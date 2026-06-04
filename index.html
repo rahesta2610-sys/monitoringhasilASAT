@@ -17,7 +17,6 @@
   --text: #1a1814;
   --text2: #6b6760;
   --text3: #a8a49e;
-  --ink: #1a1814;
   --accent: #c84b2f;
   --accent-light: rgba(200,75,47,0.08);
   --green: #2e7d52;
@@ -31,7 +30,6 @@
   --radius-xl: 24px;
   --font: 'Sora', sans-serif;
   --mono: 'JetBrains Mono', monospace;
-  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -44,7 +42,6 @@
     --text: #f0ede8;
     --text2: #8c8880;
     --text3: #5c5a55;
-    --ink: #f0ede8;
     --accent: #e8634a;
     --accent-light: rgba(232,99,74,0.1);
     --green: #4caf78;
@@ -53,7 +50,6 @@
     --amber-light: rgba(232,160,48,0.1);
     --blue: #5b9de0;
     --blue-light: rgba(91,157,224,0.1);
-    --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 12px rgba(0,0,0,0.2);
   }
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -71,9 +67,9 @@ body {
 /* Layout */
 .page { max-width: 960px; margin: 0 auto; padding: 0 20px 80px; }
 
-/* Top bar */
+/* Topbar */
 .topbar {
-  position: sticky; top: 0; z-index: 100;
+  position: sticky; top: 0; z-index: 200;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   padding: 0 20px;
@@ -85,16 +81,10 @@ body {
   height: 60px;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
-.topbar-brand {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none; color: var(--text);
-}
+.topbar-brand { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; }
 .brand-icon {
-  width: 32px; height: 32px;
-  background: var(--accent);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+  width: 32px; height: 32px; background: var(--accent); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .brand-icon svg { width: 18px; height: 18px; color: #fff; }
 .brand-name { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
@@ -106,83 +96,53 @@ body {
   display: inline-flex; align-items: center; gap: 6px;
   padding: 8px 14px; border-radius: var(--radius);
   border: 1px solid var(--border2);
-  background: var(--surface);
-  color: var(--text2);
+  background: var(--surface); color: var(--text2);
   font-family: var(--font); font-size: 13px; font-weight: 500;
-  cursor: pointer; transition: all .15s; text-decoration: none;
-  white-space: nowrap;
+  cursor: pointer; transition: all .15s; text-decoration: none; white-space: nowrap;
 }
-.btn:hover { background: var(--surface3); color: var(--text); border-color: var(--border2); }
+.btn:hover { background: var(--surface3); color: var(--text); }
 .btn:active { transform: scale(0.97); }
 .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
 .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
-.btn-accent {
-  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
-}
+.btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
 .btn-accent:hover { opacity: 0.9; color: #fff; background: var(--accent); }
-.btn-icon {
-  padding: 8px; width: 36px; height: 36px; justify-content: center;
-}
-.btn-label-loading .btn-text::after { content: '…'; animation: dots 1.2s infinite; }
-@keyframes dots { 0%,100%{opacity:1}50%{opacity:.4} }
+.btn-icon { padding: 8px; width: 36px; height: 36px; justify-content: center; }
 
-/* Hero section */
+/* Hero */
 .hero { padding: 40px 0 28px; }
-.hero-title {
-  font-size: clamp(24px, 5vw, 38px);
-  font-weight: 700;
-  letter-spacing: -0.8px;
-  line-height: 1.15;
-  color: var(--text);
-}
+.hero-title { font-size: clamp(24px, 5vw, 38px); font-weight: 700; letter-spacing: -0.8px; line-height: 1.15; }
 .hero-title span { color: var(--accent); }
 .hero-sub { font-size: 14px; color: var(--text2); margin-top: 8px; }
-
-/* Status pill */
 .status-pill {
   display: inline-flex; align-items: center; gap: 7px;
   padding: 6px 12px; border-radius: 100px;
   background: var(--surface); border: 1px solid var(--border);
   font-size: 12px; color: var(--text2); margin-top: 16px;
 }
-.status-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--text3); flex-shrink: 0; transition: background .3s;
-}
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text3); flex-shrink: 0; transition: background .3s; }
 .status-dot.ok { background: var(--green); }
 .status-dot.err { background: var(--accent); }
-.status-dot.loading {
-  background: var(--amber);
-  animation: pulse-dot 1s ease-in-out infinite;
-}
+.status-dot.loading { background: var(--amber); animation: pulse-dot 1s ease-in-out infinite; }
 @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(0.7)} }
 
 /* Stats */
 .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0; }
 @media (min-width: 600px) { .stats { grid-template-columns: repeat(4, 1fr); } }
 .stat {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: 18px 20px;
-  border: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
+  background: var(--surface); border-radius: var(--radius-lg); padding: 18px 20px;
+  border: 1px solid var(--border); position: relative; overflow: hidden;
   transition: border-color .2s, transform .2s;
 }
 .stat:hover { border-color: var(--border2); transform: translateY(-1px); }
 .stat::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 .stat.blue::before { background: var(--blue); }
 .stat.green::before { background: var(--green); }
 .stat.red::before { background: var(--accent); }
 .stat.amber::before { background: var(--amber); }
-.stat-num {
-  font-size: 32px; font-weight: 700; letter-spacing: -1.5px;
-  line-height: 1; margin-bottom: 6px; font-variant-numeric: tabular-nums;
-}
+.stat-num { font-size: 32px; font-weight: 700; letter-spacing: -1.5px; line-height: 1; margin-bottom: 6px; font-variant-numeric: tabular-nums; }
 .stat.blue .stat-num { color: var(--blue); }
 .stat.green .stat-num { color: var(--green); }
 .stat.red .stat-num { color: var(--accent); }
@@ -190,105 +150,136 @@ body {
 .stat-label { font-size: 12px; font-weight: 500; color: var(--text2); }
 .stat-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
 
-/* Filter section */
-.filters {
-  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
-  margin-bottom: 16px;
+/* ── Filter area ── */
+.filter-area { margin-bottom: 20px; }
+
+/* Search bar row */
+.filter-toprow { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+.search-wrap { position: relative; flex: 1; }
+.search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; color: var(--text3); pointer-events: none; }
+.search-input {
+  width: 100%; height: 40px; padding: 0 14px 0 38px;
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius); color: var(--text);
+  font-family: var(--font); font-size: 13px; outline: none;
+  transition: border-color .15s, box-shadow .15s;
 }
-.filters select, .filters input[type="text"] {
+.search-input::placeholder { color: var(--text3); }
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-light); }
+.filter-toggle-btn {
+  display: inline-flex; align-items: center; gap: 6px;
   height: 40px; padding: 0 14px;
-  background: var(--surface);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius);
-  color: var(--text); font-family: var(--font); font-size: 13px;
-  outline: none; transition: border-color .15s, box-shadow .15s;
-  -webkit-appearance: none; appearance: none;
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius); color: var(--text2);
+  font-family: var(--font); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all .15s; white-space: nowrap; flex-shrink: 0;
 }
-.filters select {
-  padding-right: 32px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23a8a49e'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  min-width: 140px;
+.filter-toggle-btn:hover { background: var(--surface3); color: var(--text); }
+.filter-toggle-btn svg { width: 14px; height: 14px; flex-shrink: 0; transition: transform .2s; }
+.filter-toggle-btn.open svg.chevron { transform: rotate(180deg); }
+.filter-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 18px; height: 18px; border-radius: 100px; padding: 0 5px;
+  background: var(--accent); color: #fff; font-size: 10px; font-weight: 700;
+  line-height: 1;
 }
-.filters select:focus, .filters input[type="text"]:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-light);
+.filter-badge.hidden { display: none; }
+
+/* Filter panel */
+.filter-panel {
+  background: var(--surface); border: 1px solid var(--border2);
+  border-radius: var(--radius-lg); overflow: hidden;
+  max-height: 0; transition: max-height .3s cubic-bezier(0.4,0,0.2,1), opacity .2s;
+  opacity: 0; pointer-events: none;
 }
-.filter-search {
-  flex: 1; min-width: 200px;
-  padding-left: 40px !important;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a8a49e' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='M21 21l-4.35-4.35'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 13px center;
-  background-color: var(--surface) !important;
+.filter-panel.open { max-height: 800px; opacity: 1; pointer-events: auto; }
+.filter-panel-inner { padding: 16px 20px 20px; }
+.filter-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 500px) { .filter-groups { grid-template-columns: 1fr; } }
+
+.filter-group-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+  color: var(--text3); margin-bottom: 10px;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
 }
-.filter-search::placeholder { color: var(--text3); }
-.filter-meta { font-size: 12px; color: var(--text3); margin-left: auto; white-space: nowrap; }
+.group-actions { display: flex; gap: 6px; }
+.group-action-btn {
+  font-size: 10px; font-weight: 600; color: var(--accent);
+  background: none; border: none; cursor: pointer; padding: 0;
+  font-family: var(--font); letter-spacing: 0;
+  text-transform: none; transition: opacity .15s;
+}
+.group-action-btn:hover { opacity: 0.7; }
+
+.checkbox-list { display: flex; flex-direction: column; gap: 2px; }
+.cb-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px; border-radius: 8px; cursor: pointer;
+  transition: background .1s; user-select: none;
+}
+.cb-item:hover { background: var(--surface2); }
+.cb-item input[type="checkbox"] { display: none; }
+.cb-box {
+  width: 18px; height: 18px; border-radius: 5px; flex-shrink: 0;
+  border: 1.5px solid var(--border2); background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .15s;
+}
+.cb-item input:checked ~ .cb-box {
+  background: var(--accent); border-color: var(--accent);
+}
+.cb-box svg { width: 11px; height: 11px; color: #fff; opacity: 0; transition: opacity .1s; stroke-width: 3; }
+.cb-item input:checked ~ .cb-box svg { opacity: 1; }
+.cb-label { font-size: 13px; color: var(--text); font-weight: 500; flex: 1; }
+.cb-count { font-size: 11px; color: var(--text3); font-family: var(--mono); }
+
+.filter-panel-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 20px; border-top: 1px solid var(--border);
+  background: var(--surface2);
+}
+.filter-meta-text { font-size: 12px; color: var(--text3); }
+.active-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.active-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 100px;
+  background: var(--accent-light); color: var(--accent);
+  font-size: 11px; font-weight: 600; border: 1px solid rgba(200,75,47,0.2);
+  cursor: pointer; transition: background .1s;
+}
+.active-chip:hover { background: rgba(200,75,47,0.15); }
+.active-chip svg { width: 10px; height: 10px; flex-shrink: 0; }
 
 /* Section header */
-.section-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 12px; gap: 12px;
-}
-.section-title { font-size: 13px; font-weight: 600; color: var(--text2); letter-spacing: 0.5px; text-transform: uppercase; }
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; gap: 12px; }
+.section-title { font-size: 12px; font-weight: 700; color: var(--text3); letter-spacing: 0.7px; text-transform: uppercase; }
+.result-count { font-size: 12px; color: var(--text3); }
 
-/* Cards container (mobile) + Table (desktop) */
-.data-container {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-}
-
-/* Desktop table */
+/* Data container */
+.data-container { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-xl); overflow: hidden; }
 .table-wrap { overflow-x: auto; display: none; }
-@media (min-width: 700px) {
-  .table-wrap { display: block; }
-  .cards-list { display: none; }
-}
+@media (min-width: 700px) { .table-wrap { display: block; } .cards-list { display: none; } }
 table { width: 100%; border-collapse: collapse; }
 thead { background: var(--surface2); }
-th {
-  padding: 12px 16px;
-  font-size: 11px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase;
-  color: var(--text3); white-space: nowrap;
-  border-bottom: 1px solid var(--border);
-  text-align: left;
-}
-td {
-  padding: 14px 16px;
-  border-bottom: 1px solid var(--border);
-  vertical-align: middle;
-}
+th { padding: 12px 16px; font-size: 11px; font-weight: 600; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text3); white-space: nowrap; border-bottom: 1px solid var(--border); text-align: left; }
+td { padding: 14px 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
 tbody tr:last-child td { border-bottom: none; }
 tbody tr { transition: background .1s; }
 tbody tr:hover td { background: var(--surface2); }
 
-/* Mobile card list */
 .cards-list { display: flex; flex-direction: column; }
-.student-card {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  transition: background .1s;
-}
+.student-card { padding: 16px 20px; border-bottom: 1px solid var(--border); transition: background .1s; }
 .student-card:last-child { border-bottom: none; }
 .student-card:active { background: var(--surface2); }
 .card-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .card-avatar {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: var(--surface3);
+  width: 40px; height: 40px; border-radius: 10px; background: var(--surface3);
   display: flex; align-items: center; justify-content: center;
-  font-size: 14px; font-weight: 700; color: var(--text2);
-  flex-shrink: 0; letter-spacing: -0.5px;
-  font-family: var(--font);
+  font-size: 14px; font-weight: 700; color: var(--text2); flex-shrink: 0; letter-spacing: -0.5px;
 }
 .card-info { flex: 1; min-width: 0; }
 .card-name { font-size: 14px; font-weight: 600; color: var(--text); }
-.card-meta {
-  display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px;
-  align-items: center;
-}
+.card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; align-items: center; }
 .card-right { text-align: right; flex-shrink: 0; }
 .card-no { font-family: var(--mono); font-size: 11px; color: var(--text3); }
 .card-count { font-size: 20px; font-weight: 700; color: var(--accent); line-height: 1; }
@@ -296,40 +287,19 @@ tbody tr:hover td { background: var(--surface2); }
 .card-subjects { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
 
 /* Chips */
-.chip {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 11px; font-weight: 500; padding: 3px 10px;
-  border-radius: 100px; white-space: nowrap;
-  line-height: 1.4;
-}
-.chip-class {
-  background: var(--surface3); color: var(--text2);
-  border: 1px solid var(--border);
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.3px;
-}
+.chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 100px; white-space: nowrap; line-height: 1.4; }
+.chip-class { background: var(--surface3); color: var(--text2); border: 1px solid var(--border); font-family: var(--mono); font-size: 10px; letter-spacing: 0.3px; }
 .chip-school { background: var(--blue-light); color: var(--blue); }
 .chip-room { background: var(--amber-light); color: var(--amber); }
-.chip-subject {
-  background: var(--accent-light); color: var(--accent);
-  font-weight: 600;
-}
+.chip-subject { background: var(--accent-light); color: var(--accent); font-weight: 600; }
 .subjects-wrap { display: flex; flex-wrap: wrap; gap: 4px; }
 
-/* Table specific */
 .td-name .name-main { font-weight: 600; font-size: 14px; }
-.td-name .name-id { font-family: var(--mono); font-size: 10px; color: var(--text3); margin-top: 2px; }
 .num-col { font-family: var(--mono); font-size: 11px; color: var(--text3); text-align: center; }
 
-/* Empty & error states */
-.state-box {
-  padding: 64px 24px; text-align: center;
-}
-.state-icon {
-  width: 56px; height: 56px; border-radius: 16px;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 20px;
-  background: var(--surface2);
-}
+/* States */
+.state-box { padding: 64px 24px; text-align: center; }
+.state-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; background: var(--surface2); }
 .state-icon.success { background: var(--green-light); }
 .state-icon.error { background: var(--accent-light); }
 .state-icon svg { width: 28px; height: 28px; }
@@ -338,46 +308,34 @@ tbody tr:hover td { background: var(--surface2); }
 
 /* Skeleton */
 .sk { background: var(--surface3); border-radius: 4px; animation: shimmer 1.4s infinite; }
-@keyframes shimmer {
-  0%{opacity:.7}50%{opacity:.35}100%{opacity:.7}
-}
+@keyframes shimmer { 0%{opacity:.7}50%{opacity:.35}100%{opacity:.7} }
 .sk-card { padding: 16px 20px; border-bottom: 1px solid var(--border); }
 .sk-row { display: flex; align-items: center; gap: 12px; }
 .sk-avatar { width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0; }
 .sk-lines { flex: 1; }
 .sk-line { height: 12px; margin-bottom: 8px; border-radius: 4px; }
-.sk-line.w60 { width: 60%; }
-.sk-line.w40 { width: 40%; }
-.sk-line.w80 { width: 80%; margin-bottom: 0; }
+.sk-line.w60 { width: 60%; } .sk-line.w40 { width: 40%; }
 .sk-chips { display: flex; gap: 6px; margin-top: 10px; }
 .sk-chip { height: 22px; border-radius: 100px; }
-.sk-chip.c1 { width: 60px; }
-.sk-chip.c2 { width: 80px; }
-.sk-chip.c3 { width: 50px; }
+.sk-chip.c1{width:60px}.sk-chip.c2{width:80px}.sk-chip.c3{width:50px}
 
 /* Footer */
 .footer { margin-top: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 11px; color: var(--text3); padding: 0 2px; }
 
-/* Print */
 @media print {
-  .topbar-actions, .filters .btn, .hero-actions { display: none !important; }
+  .topbar-actions, .filter-area { display: none !important; }
   .data-container { border: 1px solid #ddd; }
   body { background: #fff; color: #000; }
-  .stat { border: 1px solid #ddd; }
-  .chip-subject { background: #fee2e2; color: #b91c1c; }
-  .chip-class { background: #f3f4f6; color: #374151; }
   .topbar { position: static; }
+  .chip-subject { background: #fee2e2; color: #b91c1c; }
 }
 @media (max-width: 400px) {
-  .topbar-inner { gap: 8px; }
   .brand-sub { display: none; }
-  .btn-icon-label { display: none; }
 }
 </style>
 </head>
 <body>
 
-<!-- Top navigation -->
 <nav class="topbar">
   <div class="topbar-inner">
     <div class="topbar-brand">
@@ -394,24 +352,13 @@ tbody tr:hover td { background: var(--surface2); }
     </div>
     <div class="topbar-actions">
       <button class="btn btn-icon" onclick="exportCSV()" title="Unduh CSV">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-          <polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       </button>
       <button class="btn btn-icon" onclick="window.print()" title="Cetak">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6 9 6 2 18 2 18 9"/>
-          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-          <rect x="6" y="14" width="12" height="8"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
       </button>
       <button class="btn btn-accent" onclick="loadData()" id="btnRefresh">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <polyline points="23 4 23 10 17 10"/>
-          <polyline points="1 20 1 14 7 14"/>
-          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
         <span class="btn-text">Muat Data</span>
       </button>
     </div>
@@ -419,7 +366,7 @@ tbody tr:hover td { background: var(--surface2); }
 </nav>
 
 <div class="page">
-  <!-- Hero -->
+
   <div class="hero">
     <h1 class="hero-title">Siswa <span>Belum</span><br>Menyelesaikan Ujian</h1>
     <p class="hero-sub">Pantau siswa yang masih memiliki mata pelajaran kosong</p>
@@ -429,56 +376,82 @@ tbody tr:hover td { background: var(--surface2); }
     </div>
   </div>
 
-  <!-- Stats -->
   <div class="stats">
-    <div class="stat blue">
-      <div class="stat-num" id="stTotal">—</div>
-      <div class="stat-label">Total Siswa</div>
-      <div class="stat-sub">terdaftar</div>
+    <div class="stat blue"><div class="stat-num" id="stTotal">—</div><div class="stat-label">Total Siswa</div><div class="stat-sub">terdaftar</div></div>
+    <div class="stat green"><div class="stat-num" id="stSudah">—</div><div class="stat-label">Sudah Selesai</div><div class="stat-sub">semua mapel</div></div>
+    <div class="stat red"><div class="stat-num" id="stBelum">—</div><div class="stat-label">Belum Lengkap</div><div class="stat-sub">ada mapel kosong</div></div>
+    <div class="stat amber"><div class="stat-num" id="stMapel">—</div><div class="stat-label">Mata Pelajaran</div><div class="stat-sub">dimonitor</div></div>
+  </div>
+
+  <!-- Filter area -->
+  <div class="filter-area">
+
+    <!-- Top row: search + toggle button -->
+    <div class="filter-toprow">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="filterNama" placeholder="Cari nama atau no. peserta…" oninput="render()" />
+      </div>
+      <button class="filter-toggle-btn" id="filterToggleBtn" onclick="toggleFilterPanel()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        Filter
+        <span class="filter-badge hidden" id="filterBadge">0</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
     </div>
-    <div class="stat green">
-      <div class="stat-num" id="stSudah">—</div>
-      <div class="stat-label">Sudah Selesai</div>
-      <div class="stat-sub">semua mapel</div>
-    </div>
-    <div class="stat red">
-      <div class="stat-num" id="stBelum">—</div>
-      <div class="stat-label">Belum Lengkap</div>
-      <div class="stat-sub">ada mapel kosong</div>
-    </div>
-    <div class="stat amber">
-      <div class="stat-num" id="stMapel">—</div>
-      <div class="stat-label">Mata Pelajaran</div>
-      <div class="stat-sub">dimonitor</div>
+
+    <!-- Active filter chips (shown when panel closed) -->
+    <div class="active-filters" id="activeFilters"></div>
+
+    <!-- Collapsible filter panel -->
+    <div class="filter-panel" id="filterPanel">
+      <div class="filter-panel-inner">
+        <div class="filter-groups">
+
+          <!-- Kelas -->
+          <div>
+            <div class="filter-group-title">
+              Kelas
+              <div class="group-actions">
+                <button class="group-action-btn" onclick="selectAllGroup('kelas')">Semua</button>
+                <button class="group-action-btn" onclick="clearGroup('kelas')">Hapus</button>
+              </div>
+            </div>
+            <div class="checkbox-list" id="cbKelas"></div>
+          </div>
+
+          <!-- Mata Pelajaran -->
+          <div>
+            <div class="filter-group-title">
+              Mata Pelajaran
+              <div class="group-actions">
+                <button class="group-action-btn" onclick="selectAllGroup('mapel')">Semua</button>
+                <button class="group-action-btn" onclick="clearGroup('mapel')">Hapus</button>
+              </div>
+            </div>
+            <div class="checkbox-list" id="cbMapel"></div>
+          </div>
+
+        </div>
+      </div>
+      <div class="filter-panel-footer">
+        <span class="filter-meta-text" id="filterPanelMeta"></span>
+        <button class="btn" style="height:34px;padding:0 12px;font-size:12px" onclick="resetFilters()">Reset Semua</button>
+      </div>
     </div>
   </div>
 
-  <!-- Filters -->
-  <div class="filters">
-    <select id="filterKelas" onchange="render()">
-      <option value="">Semua Kelas</option>
-    </select>
-    <select id="filterMapel" onchange="render()">
-      <option value="">Semua Mapel</option>
-    </select>
-    <input type="text" class="filter-search" id="filterNama"
-      placeholder="Cari nama atau no. peserta…" oninput="render()" />
-    <span class="filter-meta" id="filterCount"></span>
-  </div>
-
-  <!-- Section header -->
   <div class="section-header">
     <span class="section-title">Daftar Siswa</span>
+    <span class="result-count" id="filterCount"></span>
   </div>
 
-  <!-- Data container -->
   <div class="data-container">
-    <!-- Desktop table -->
     <div class="table-wrap">
       <table>
         <thead>
           <tr>
-            <th style="width:40px; text-align:center">#</th>
+            <th style="width:40px;text-align:center">#</th>
             <th>No Peserta</th>
             <th>Nama Siswa</th>
             <th>Kelas</th>
@@ -490,8 +463,6 @@ tbody tr:hover td { background: var(--surface2); }
         <tbody id="tableBody"></tbody>
       </table>
     </div>
-
-    <!-- Mobile cards -->
     <div class="cards-list" id="cardsList"></div>
   </div>
 
@@ -499,16 +470,25 @@ tbody tr:hover td { background: var(--surface2); }
     <span id="lastUpdate">Belum dimuat</span>
     <span>Google Apps Script · Firestore</span>
   </div>
+
 </div>
 
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwWkgrJWOqFM2fh-F5xUuZH6gjK56rVbjlUyywD_u7hQPH7zM3gLzCpCTBRdxRChncv/exec';
 const FIXED_COLS = ['no peserta','nama','kelas','sekolah','ruang'];
 
-let allRows = [];
+let allRows   = [];
 let mapelCols = [];
+let kelasList = [];
 let isLoading = false;
 
+// Checkbox state: Set of selected values (null = all selected = show all)
+// We store as Sets; empty set = nothing selected (show nothing), full set = all selected
+let selectedKelas = new Set();
+let selectedMapel = new Set();
+let filterPanelOpen = false;
+
+/* ──────────────────── LOAD ──────────────────── */
 async function loadData() {
   if (isLoading) return;
   isLoading = true;
@@ -537,9 +517,10 @@ async function loadData() {
   btn.querySelector('.btn-text').textContent = 'Refresh';
 }
 
+/* ──────────────────── PROCESS ──────────────────── */
 function processData(json) {
   const rawHeaders = (json.headers || []).map(h => String(h).trim());
-  const rawRows = json.data || [];
+  const rawRows    = json.data || [];
 
   mapelCols = rawHeaders.filter(h => !FIXED_COLS.includes(h.toLowerCase()));
 
@@ -554,27 +535,174 @@ function processData(json) {
       return obj;
     });
 
-  const kelasList = [...new Set(
+  kelasList = [...new Set(
     allRows.map(r => String(getField(r,'kelas') || '').trim()).filter(Boolean)
   )].sort();
 
-  const selKelas = document.getElementById('filterKelas');
-  selKelas.innerHTML = '<option value="">Semua Kelas</option>' +
-    kelasList.map(k => `<option value="${esc(k)}">${esc(k)}</option>`).join('');
-
-  const selMapel = document.getElementById('filterMapel');
-  selMapel.innerHTML = '<option value="">Semua Mapel</option>' +
-    mapelCols.map(m => `<option value="${esc(m)}">${esc(labelMapel(m))}</option>`).join('');
+  // Default: all selected
+  selectedKelas = new Set(kelasList);
+  selectedMapel = new Set(mapelCols);
 
   document.getElementById('stMapel').textContent = mapelCols.length;
+
+  buildCheckboxes();
   render();
 }
 
+/* ──────────────────── BUILD CHECKBOXES ──────────────────── */
+function buildCheckboxes() {
+  // Kelas checkboxes
+  const cbKelasEl = document.getElementById('cbKelas');
+  // Count students per kelas
+  const kelasCount = {};
+  allRows.forEach(r => {
+    const k = String(getField(r,'kelas') || '').trim();
+    if (k) kelasCount[k] = (kelasCount[k] || 0) + 1;
+  });
+  cbKelasEl.innerHTML = kelasList.map(k => cbHTML('kelas', k, labelMapel(k), kelasCount[k] || 0)).join('');
+
+  // Mapel checkboxes
+  const cbMapelEl = document.getElementById('cbMapel');
+  // Count how many students have that mapel empty
+  const mapelBelumCount = {};
+  mapelCols.forEach(m => {
+    mapelBelumCount[m] = allRows.filter(r => isEmpty(r[m])).length;
+  });
+  cbMapelEl.innerHTML = mapelCols.map(m => cbHTML('mapel', m, labelMapel(m), mapelBelumCount[m])).join('');
+}
+
+function cbHTML(group, value, label, count) {
+  const id = 'cb_' + group + '_' + value.replace(/[^a-z0-9]/gi,'_');
+  return `<label class="cb-item" for="${esc(id)}">
+    <input type="checkbox" id="${esc(id)}" checked
+      onchange="onCbChange('${group}','${esc(value)}')" />
+    <span class="cb-box">
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor"><polyline points="1.5 6 4.5 9 10.5 3"/></svg>
+    </span>
+    <span class="cb-label">${esc(label)}</span>
+    <span class="cb-count">${count}</span>
+  </label>`;
+}
+
+/* ──────────────────── CHECKBOX EVENTS ──────────────────── */
+function onCbChange(group, value) {
+  const set = group === 'kelas' ? selectedKelas : selectedMapel;
+  const el  = document.getElementById('cb_' + group + '_' + value.replace(/[^a-z0-9]/gi,'_'));
+  if (el.checked) set.add(value);
+  else set.delete(value);
+  render();
+  updateFilterBadge();
+  updateActiveChips();
+}
+
+function selectAllGroup(group) {
+  const list = group === 'kelas' ? kelasList : mapelCols;
+  const set  = group === 'kelas' ? selectedKelas : selectedMapel;
+  list.forEach(v => set.add(v));
+  list.forEach(v => {
+    const el = document.getElementById('cb_' + group + '_' + v.replace(/[^a-z0-9]/gi,'_'));
+    if (el) el.checked = true;
+  });
+  render(); updateFilterBadge(); updateActiveChips();
+}
+
+function clearGroup(group) {
+  const list = group === 'kelas' ? kelasList : mapelCols;
+  const set  = group === 'kelas' ? selectedKelas : selectedMapel;
+  set.clear();
+  list.forEach(v => {
+    const el = document.getElementById('cb_' + group + '_' + v.replace(/[^a-z0-9]/gi,'_'));
+    if (el) el.checked = false;
+  });
+  render(); updateFilterBadge(); updateActiveChips();
+}
+
+function resetFilters() {
+  selectAllGroup('kelas');
+  selectAllGroup('mapel');
+}
+
+/* ──────────────────── PANEL TOGGLE ──────────────────── */
+function toggleFilterPanel() {
+  filterPanelOpen = !filterPanelOpen;
+  const panel = document.getElementById('filterPanel');
+  const btn   = document.getElementById('filterToggleBtn');
+  panel.classList.toggle('open', filterPanelOpen);
+  btn.classList.toggle('open', filterPanelOpen);
+}
+
+/* ──────────────────── BADGE & ACTIVE CHIPS ──────────────────── */
+function updateFilterBadge() {
+  const deselKelas = kelasList.filter(k => !selectedKelas.has(k)).length;
+  const deselMapel = mapelCols.filter(m => !selectedMapel.has(m)).length;
+  const total = deselKelas + deselMapel;
+  const badge = document.getElementById('filterBadge');
+  badge.textContent = total;
+  badge.classList.toggle('hidden', total === 0);
+
+  const meta = document.getElementById('filterPanelMeta');
+  meta.textContent = total > 0 ? `${total} filter aktif` : 'Semua ditampilkan';
+}
+
+function updateActiveChips() {
+  // Show chips for deselected (hidden) items
+  const deselKelas = kelasList.filter(k => !selectedKelas.has(k));
+  const deselMapel = mapelCols.filter(m => !selectedMapel.has(m));
+
+  let html = '';
+  if (deselKelas.length > 0 && deselKelas.length < kelasList.length) {
+    // Some kelas hidden
+    const shown = kelasList.filter(k => selectedKelas.has(k));
+    shown.forEach(k => {
+      html += `<span class="active-chip" onclick="toggleOneKelas('${esc(k)}')">
+        Kelas ${esc(k)}
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
+      </span>`;
+    });
+  } else if (deselKelas.length === kelasList.length) {
+    html += `<span class="active-chip" onclick="selectAllGroup('kelas')">
+      Semua kelas tersembunyi
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
+    </span>`;
+  }
+  deselMapel.forEach(m => {
+    html += `<span class="active-chip" onclick="toggleOneMapel('${esc(m)}')">
+      Tanpa ${esc(labelMapel(m))}
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2"><line x1="1" y1="1" x2="11" y2="11"/><line x1="11" y1="1" x2="1" y2="11"/></svg>
+    </span>`;
+  });
+  document.getElementById('activeFilters').innerHTML = html;
+}
+
+function toggleOneKelas(k) {
+  if (selectedKelas.has(k)) {
+    selectedKelas.delete(k);
+    const el = document.getElementById('cb_kelas_' + k.replace(/[^a-z0-9]/gi,'_'));
+    if (el) el.checked = false;
+  } else {
+    selectedKelas.add(k);
+    const el = document.getElementById('cb_kelas_' + k.replace(/[^a-z0-9]/gi,'_'));
+    if (el) el.checked = true;
+  }
+  render(); updateFilterBadge(); updateActiveChips();
+}
+
+function toggleOneMapel(m) {
+  if (selectedMapel.has(m)) {
+    selectedMapel.delete(m);
+    const el = document.getElementById('cb_mapel_' + m.replace(/[^a-z0-9]/gi,'_'));
+    if (el) el.checked = false;
+  } else {
+    selectedMapel.add(m);
+    const el = document.getElementById('cb_mapel_' + m.replace(/[^a-z0-9]/gi,'_'));
+    if (el) el.checked = true;
+  }
+  render(); updateFilterBadge(); updateActiveChips();
+}
+
+/* ──────────────────── RENDER ──────────────────── */
 function render() {
-  const fKelas = document.getElementById('filterKelas').value;
-  const fMapel = document.getElementById('filterMapel').value;
-  const fNama  = document.getElementById('filterNama').value.trim().toLowerCase();
-  const mapelCheck = fMapel ? [fMapel] : mapelCols;
+  const fNama = document.getElementById('filterNama').value.trim().toLowerCase();
 
   const belumList = [];
   let sudahCount = 0, totalCount = 0;
@@ -584,16 +712,17 @@ function render() {
     const nama  = String(getField(r,'nama')  || '').trim();
     const no    = String(getField(r,'no peserta') || '').trim();
 
-    if (fKelas && kelas !== fKelas) return;
+    // Kelas filter
+    if (selectedKelas.size > 0 && !selectedKelas.has(kelas)) return;
+
+    // Search filter
     if (fNama && !nama.toLowerCase().includes(fNama) && !no.toLowerCase().includes(fNama)) return;
 
     totalCount++;
-    const mapelBelum = mapelCheck.filter(m => {
-      const val = r[m];
-      if (val === undefined || val === null) return true;
-      const s = String(val).trim();
-      return s === '' || s === '-' || s === 'null';
-    });
+
+    // Mapel filter: only check selected mapel
+    const mapelToCheck = mapelCols.filter(m => selectedMapel.has(m));
+    const mapelBelum   = mapelToCheck.filter(m => isEmpty(r[m]));
 
     if (!mapelBelum.length) { sudahCount++; return; }
 
@@ -611,22 +740,20 @@ function render() {
     return a.nama.localeCompare(b.nama,'id');
   });
 
-  document.getElementById('stTotal').textContent = totalCount || (allRows.length ? allRows.length : '—');
+  document.getElementById('stTotal').textContent = allRows.length || '—';
   document.getElementById('stSudah').textContent = allRows.length ? sudahCount : '—';
   document.getElementById('stBelum').textContent = allRows.length ? belumList.length : '—';
   document.getElementById('filterCount').textContent = allRows.length
-    ? `${belumList.length} siswa ditampilkan` : '';
+    ? `${belumList.length} siswa` : '';
 
   if (!allRows.length) return;
 
   if (!belumList.length) {
     const empty = `<div class="state-box">
       <div class="state-icon success">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--green)">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--green)"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
-      <div class="state-title">Semua sudah mengerjakan! 🎉</div>
+      <div class="state-title">Semua sudah mengerjakan!</div>
       <div class="state-sub">Tidak ada siswa dengan mata pelajaran kosong berdasarkan filter yang dipilih.</div>
     </div>`;
     document.getElementById('tableBody').innerHTML = `<tr><td colspan="7">${empty}</td></tr>`;
@@ -634,7 +761,7 @@ function render() {
     return;
   }
 
-  // Desktop table rows
+  // Desktop table
   let tRows = '';
   belumList.forEach((s, i) => {
     const badges = s.mapelBelum.map(m =>
@@ -642,9 +769,7 @@ function render() {
     tRows += `<tr>
       <td class="num-col">${i+1}</td>
       <td style="font-family:var(--mono);font-size:11px;color:var(--text3)">${esc(s.no)||'—'}</td>
-      <td class="td-name">
-        <div class="name-main">${esc(s.nama)}</div>
-      </td>
+      <td class="td-name"><div class="name-main">${esc(s.nama)}</div></td>
       <td><span class="chip chip-class">${esc(s.kelas)||'—'}</span></td>
       <td style="font-size:12px;color:var(--text2)">${esc(s.sekolah)||'—'}</td>
       <td style="font-size:12px;color:var(--text2)">${esc(s.ruang)||'—'}</td>
@@ -659,7 +784,6 @@ function render() {
     const initials = s.nama.split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase();
     const subjectBadges = s.mapelBelum.map(m =>
       `<span class="chip chip-subject">${esc(labelMapel(m))}</span>`).join('');
-
     mCards += `<div class="student-card">
       <div class="card-row">
         <div class="card-avatar">${esc(initials)}</div>
@@ -683,45 +807,25 @@ function render() {
   document.getElementById('cardsList').innerHTML = mCards;
 }
 
+/* ──────────────────── EXPORT ──────────────────── */
 function exportCSV() {
   if (!allRows.length) { alert('Belum ada data.'); return; }
-  const fKelas = document.getElementById('filterKelas').value;
-  const fMapel = document.getElementById('filterMapel').value;
-  const fNama  = document.getElementById('filterNama').value.trim().toLowerCase();
-  const mapelCheck = fMapel ? [fMapel] : mapelCols;
-
+  const fNama = document.getElementById('filterNama').value.trim().toLowerCase();
   const csvRows = [['No','No Peserta','Nama','Kelas','Sekolah','Ruang','Mapel Belum','Jumlah']];
   let idx = 1;
-
   allRows.forEach(r => {
     const kelas = String(getField(r,'kelas') || '').trim();
     const nama  = String(getField(r,'nama')  || '').trim();
     const no    = String(getField(r,'no peserta') || '').trim();
     if (!nama) return;
-    if (fKelas && kelas !== fKelas) return;
+    if (selectedKelas.size > 0 && !selectedKelas.has(kelas)) return;
     if (fNama && !nama.toLowerCase().includes(fNama) && !no.toLowerCase().includes(fNama)) return;
-
-    const mb = mapelCheck.filter(m => {
-      const val = r[m];
-      if (val === undefined || val === null) return true;
-      const s = String(val).trim();
-      return s === '' || s === '-' || s === 'null';
-    });
+    const mapelToCheck = mapelCols.filter(m => selectedMapel.has(m));
+    const mb = mapelToCheck.filter(m => isEmpty(r[m]));
     if (!mb.length) return;
-
-    csvRows.push([
-      idx++, no, nama, kelas,
-      getField(r,'sekolah') || '',
-      getField(r,'ruang')   || '',
-      mb.map(labelMapel).join('; '),
-      mb.length
-    ]);
+    csvRows.push([idx++, no, nama, kelas, getField(r,'sekolah')||'', getField(r,'ruang')||'', mb.map(labelMapel).join('; '), mb.length]);
   });
-
-  const csv = csvRows.map(r =>
-    r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')
-  ).join('\r\n');
-
+  const csv = csvRows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\r\n');
   const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8;'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -729,79 +833,47 @@ function exportCSV() {
   a.click();
 }
 
+/* ──────────────────── SKELETON ──────────────────── */
 function showSkeleton() {
   let sk = '';
   for (let i = 0; i < 6; i++) {
-    sk += `<div class="sk-card">
-      <div class="sk-row">
-        <div class="sk sk-avatar"></div>
-        <div class="sk-lines">
-          <div class="sk sk-line w60"></div>
-          <div class="sk sk-line w40"></div>
-        </div>
-      </div>
-      <div class="sk-chips">
-        <div class="sk sk-chip c1"></div>
-        <div class="sk sk-chip c2"></div>
-        <div class="sk sk-chip c3"></div>
-      </div>
-    </div>`;
+    sk += `<div class="sk-card"><div class="sk-row"><div class="sk sk-avatar"></div><div class="sk-lines"><div class="sk sk-line w60"></div><div class="sk sk-line w40"></div></div></div><div class="sk-chips"><div class="sk sk-chip c1"></div><div class="sk sk-chip c2"></div><div class="sk sk-chip c3"></div></div></div>`;
   }
   document.getElementById('cardsList').innerHTML = sk;
-
   let tsk = '';
   for (let i = 0; i < 6; i++) {
-    tsk += `<tr><td colspan="7" style="padding:14px 16px">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div class="sk" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"></div>
-        <div style="flex:1">
-          <div class="sk" style="height:12px;width:40%;border-radius:4px;margin-bottom:6px"></div>
-          <div class="sk" style="height:10px;width:25%;border-radius:4px"></div>
-        </div>
-        <div class="sk" style="height:22px;width:80px;border-radius:100px"></div>
-        <div class="sk" style="height:22px;width:60px;border-radius:100px"></div>
-      </div>
-    </td></tr>`;
+    tsk += `<tr><td colspan="7" style="padding:14px 16px"><div style="display:flex;align-items:center;gap:12px"><div class="sk" style="width:32px;height:32px;border-radius:8px;flex-shrink:0"></div><div style="flex:1"><div class="sk" style="height:12px;width:40%;border-radius:4px;margin-bottom:6px"></div><div class="sk" style="height:10px;width:25%;border-radius:4px"></div></div><div class="sk" style="height:22px;width:80px;border-radius:100px"></div><div class="sk" style="height:22px;width:60px;border-radius:100px"></div></div></td></tr>`;
   }
   document.getElementById('tableBody').innerHTML = tsk;
 }
 
 function showError(msg) {
-  const html = `<div class="state-box">
-    <div class="state-icon error">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--accent)">
-        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-      </svg>
-    </div>
-    <div class="state-title">Gagal memuat data</div>
-    <div class="state-sub">${esc(msg)}<br><br>Pastikan GAS sudah di-deploy sebagai Web App dengan akses <em>Anyone</em>.</div>
-  </div>`;
+  const html = `<div class="state-box"><div class="state-icon error"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="color:var(--accent)"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="state-title">Gagal memuat data</div><div class="state-sub">${esc(msg)}<br><br>Pastikan GAS sudah di-deploy sebagai Web App dengan akses <em>Anyone</em>.</div></div>`;
   document.getElementById('tableBody').innerHTML = `<tr><td colspan="7">${html}</td></tr>`;
   document.getElementById('cardsList').innerHTML = html;
 }
 
+/* ──────────────────── HELPERS ──────────────────── */
+function isEmpty(val) {
+  if (val === undefined || val === null) return true;
+  const s = String(val).trim();
+  return s === '' || s === '-' || s === 'null';
+}
 function setStatus(state, msg) {
   const dot = document.getElementById('statusDot');
-  dot.className = 'status-dot ' + (state === 'ok' ? 'ok' : state === 'err' ? 'err' : 'loading');
+  dot.className = 'status-dot ' + (state==='ok'?'ok':state==='err'?'err':'loading');
   document.getElementById('statusMsg').textContent = msg;
 }
-
 function getField(obj, key) {
   const lk = key.toLowerCase();
-  for (const k in obj) {
-    if (k.toLowerCase() === lk) return obj[k];
-  }
+  for (const k in obj) { if (k.toLowerCase() === lk) return obj[k]; }
   return null;
 }
-
 function labelMapel(m) {
   return m.replace(/_/g,' ').replace(/\b\w/g, c => c.toUpperCase());
 }
-
 function esc(s) {
-  return String(s||'')
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 window.addEventListener('load', loadData);
