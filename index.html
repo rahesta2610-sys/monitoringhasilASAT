@@ -194,8 +194,9 @@ body {
 }
 .filter-panel.open { max-height: 800px; opacity: 1; pointer-events: auto; }
 .filter-panel-inner { padding: 16px 20px 20px; }
-.filter-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-@media (max-width: 500px) { .filter-groups { grid-template-columns: 1fr; } }
+.filter-groups { display: flex; flex-direction: column; gap: 20px; }
+@media (min-width: 600px) { .filter-groups { flex-direction: row; } }
+@media (min-width: 600px) { .filter-groups > div { flex: 1; min-width: 0; } }
 
 .filter-group-title {
   font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
